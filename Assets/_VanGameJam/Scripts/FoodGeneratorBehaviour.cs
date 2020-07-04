@@ -17,14 +17,15 @@ public class FoodGeneratorBehaviour : MonoBehaviour
     public void Initialize()
     {
         _generator = new FoodGenerator(_containerOfAllFood);
+        NumberOfContainersToFill = 0;
         FillContainers();
+        InitializeContainers();
         AddDelegate();
     }
 
     public void Reset()
     {
         _generator = null;
-        NumberOfContainersToFill = 0;
         RemoveDelegate();
         ResetContainers();
     }
@@ -47,6 +48,14 @@ public class FoodGeneratorBehaviour : MonoBehaviour
         }
     }
 
+    private void InitializeContainers()
+    {
+        foreach (var container in _listOfContainers)
+        {
+            container.Initialize();
+        }
+    }
+
     private void ResetContainers()
     {
         foreach (var container in _listOfContainers)
@@ -60,7 +69,6 @@ public class FoodGeneratorBehaviour : MonoBehaviour
         NumberOfContainersToFill++;
         if (NumberOfContainersToFill == _listOfContainers.Count)
         {
-            Debug.Log("Fill In Containers");
             NumberOfContainersToFill = 0;
             FillContainers();
         }

@@ -86,21 +86,15 @@ public class ContainerBehaviour : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void Initialize()
     {
+        ContainerCustomLeanSpawn.Reset();
         ContainerLeanSelectable.OnSelect.RemoveAllListeners();
         ContainerLeanSelectable.OnSelect.AddListener(HandleFingerDown);
     }
 
-    private void OnDisable()
-    {
-        ContainerLeanSelectable.OnSelect.RemoveAllListeners();
-        Reset();
-    }
-
     private void HandleFingerDown(LeanFinger finger)
     {
-        Debug.Log("Current Food: " + _currentFood);
         if (FoodImage.sprite != null)
         {
             SpawnFood();

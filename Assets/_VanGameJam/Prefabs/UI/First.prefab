@@ -223,3 +223,4 @@ MonoBehaviour:
   DefaultPosition: 0
   DefaultRotation: 0
   _positionToSpawnFrom: {fileID: 0}
+  _parentToSpawnOn: {fileID: 0}
