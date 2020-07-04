@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public void Initialize()
     {
         ScaleWeightBehaviourManager.Initialize();
+        _menuPanel.Initialize();
         _losePanel.Initialize();
         AddPlayButtonListener();
     }
