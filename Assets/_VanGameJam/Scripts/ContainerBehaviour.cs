@@ -14,8 +14,8 @@ public class ContainerBehaviour : MonoBehaviour
     // Lean Dependencies
     private LeanSelectable _containerLeanSelectable = null;
     private CustomLeanSpawn _containerCustomLeanSpawn = null;
-
-    public event Action OnReleasedFood;
+    
+    public event Action<float> OnFoodStoppedMoving;
 
     private CustomLeanSpawn ContainerCustomLeanSpawn
     {
@@ -66,15 +66,23 @@ public class ContainerBehaviour : MonoBehaviour
         UpdateFoodImage();
     }
 
+    public void Reset()
+    {
+        _currentFood = null;
+        _foodSpawned = null;
+        RemoveFoodSpawnDelegate();
+        RemoveImageFromContainer();
+    }
+
     private void UpdateFoodImage()
     {
         if (_currentFood.HasValue)
         {
-            _foodImage.sprite = _currentFood.Value.FoodImage;
+            FoodImage.sprite = _currentFood.Value.FoodImage;
         }
         else
         {
-            _foodImage.sprite = null;
+            FoodImage.sprite = null;
         }
     }
 
@@ -87,21 +95,22 @@ public class ContainerBehaviour : MonoBehaviour
     private void OnDisable()
     {
         ContainerLeanSelectable.OnSelect.RemoveAllListeners();
-        FoodImage.sprite = null;
+        Reset();
     }
 
     private void HandleFingerDown(LeanFinger finger)
     {
-        if (_currentFood.HasValue)
+        Debug.Log("Current Food: " + _currentFood);
+        if (FoodImage.sprite != null)
         {
             SpawnFood();
-            RemoveFromContainer();
+            RemoveImageFromContainer();
         }
     }
 
-    private void RemoveFromContainer()
+    private void RemoveImageFromContainer()
     {
-        SetFood(null);
+        FoodImage.sprite = null;
     }
 
     private void SpawnFood()
@@ -118,7 +127,7 @@ public class ContainerBehaviour : MonoBehaviour
             _foodSpawned = food.GetComponent<FoodBehaviour>();
             if (_foodSpawned != null)
             {
-                _foodSpawned.OnReleasedFood += ContainerOnReleasedFood;
+                _foodSpawned.OnFoodStoppedMoving += ContainerOnFoodStoppedMoving;
             }
         }
     }
@@ -127,18 +136,18 @@ public class ContainerBehaviour : MonoBehaviour
     {
         if (_foodSpawned != null)
         {
-            _foodSpawned.OnReleasedFood -= ContainerOnReleasedFood;
+            _foodSpawned.OnFoodStoppedMoving -= ContainerOnFoodStoppedMoving;
         }
             
-        _foodSpawned = null;
+        _foodSpawned = null;//
     }
 
-    private void ContainerOnReleasedFood()
+    private void ContainerOnFoodStoppedMoving()
     {
-        if (OnReleasedFood != null)
+        if (_currentFood.HasValue && OnFoodStoppedMoving != null)
         {
+            OnFoodStoppedMoving(_currentFood.Value.Weight);
             RemoveFoodSpawnDelegate();
-            OnReleasedFood();
         }
     }
 

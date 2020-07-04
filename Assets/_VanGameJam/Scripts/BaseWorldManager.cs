@@ -1,18 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BaseWorldManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private FoodGeneratorBehaviour _foodGenerator = null;
+    [SerializeField] private UIManager _uiManager = null;
+    
+    private void OnEnable()
     {
-        
+        _uiManager.Initialize();
+        _foodGenerator.Initialize();
+        AddDelegate();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        _uiManager.Reset();
+        _foodGenerator.Reset();
+        RemoveDelegate();
+    }
+
+    private void AddDelegate()
+    {
+        _foodGenerator.OnFoodWeightCounted += CountWeight;
+    }
+
+    private void RemoveDelegate()
+    {
+        _foodGenerator.OnFoodWeightCounted -= CountWeight;
+    }
+
+    private void CountWeight(float weight)
+    {
+        _uiManager.UpdateWeight(weight);
     }
 }

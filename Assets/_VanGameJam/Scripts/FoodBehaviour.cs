@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class FoodBehaviour : MonoBehaviour
 {
+    private const int NumberOfTimesToCheckZeroMovement = 3;
+    
     private Rigidbody2D _foodRigidBody = null;
     private LeanSelectable _foodLeanSelectable = null;
     private LeanDragTranslate _foodLeanDragTranslate = null;
 
     private bool _needToCheckMovement = true;
+    private int _numberOfTimesCheckedZeroMovement = 0;
     
     public event Action OnReleasedFood;
     public event Action OnFoodStoppedMoving;
@@ -57,6 +60,7 @@ public class FoodBehaviour : MonoBehaviour
         FoodLeanSelectable.OnSelectUp.RemoveAllListeners();
         FoodLeanSelectable.OnSelectUp.AddListener(Released);
         SetFoodState(true);
+        _numberOfTimesCheckedZeroMovement = 0;
     }
 
     private void OnDisable()
@@ -92,6 +96,12 @@ public class FoodBehaviour : MonoBehaviour
     {
         if (HasFoodStoppedMoving() && _needToCheckMovement)
         {
+            _numberOfTimesCheckedZeroMovement++;
+            if (_numberOfTimesCheckedZeroMovement < NumberOfTimesToCheckZeroMovement)
+            {
+                return;
+            }
+            
             _needToCheckMovement = false;
             if (OnFoodStoppedMoving != null)
             {
