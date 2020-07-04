@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     {
         ScaleWeightBehaviourManager.Reset();
         _losePanel.Reset();
+        _menuPanel.Reset();
     }
 
     public void UpdateWeight(float weight)

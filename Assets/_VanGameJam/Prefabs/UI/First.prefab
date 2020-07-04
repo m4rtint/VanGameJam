@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 1611673833289560112}
   - component: {fileID: 2050777083787764994}
   - component: {fileID: 1649459496}
-  - component: {fileID: 1649459497}
   - component: {fileID: 1649459493}
   m_Layer: 5
   m_Name: First
@@ -192,21 +191,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isSelected: 0
---- !u!114 &1649459497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2555498383320129572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e3837cd44482a8459c76be5c56a41d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AutoGetDefaultColor: 1
-  DefaultColor: {r: 1, g: 1, b: 1, a: 1}
-  SelectedColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &1649459493
 MonoBehaviour:
   m_ObjectHideFlags: 0

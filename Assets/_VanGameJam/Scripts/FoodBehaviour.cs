@@ -6,6 +6,7 @@ using UnityEngine;
 public class FoodBehaviour : MonoBehaviour
 {
     private const int NumberOfTimesToCheckZeroMovement = 3;
+    private const float RemoveAnimationDuration = 1.0f;
     private const float AnimationTime = 0.5f;
     
     private Rigidbody2D _foodRigidBody = null;
@@ -54,6 +55,15 @@ public class FoodBehaviour : MonoBehaviour
 
             return _foodRigidBody;
         }
+    }
+
+    public void OnRemove()
+    {
+        FoodRigidBody.bodyType = RigidbodyType2D.Kinematic;
+        transform.DOScale(Vector3.zero, RemoveAnimationDuration).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            Destroy(gameObject);
+        });
     }
 
     private void OnEnable()
@@ -107,7 +117,6 @@ public class FoodBehaviour : MonoBehaviour
             }
             
             _needToCheckMovement = false;
-            Debug.Log("Stopped moving");
             if (OnFoodStoppedMoving != null)
             {
                 OnFoodStoppedMoving();

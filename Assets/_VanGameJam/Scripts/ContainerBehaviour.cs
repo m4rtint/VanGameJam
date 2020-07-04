@@ -82,6 +82,19 @@ public class ContainerBehaviour : MonoBehaviour
     {
         return _foodImage.sprite == null;
     }
+
+    public void Initialize()
+    {
+        ContainerCustomLeanSpawn.Reset();
+        ContainerLeanSelectable.enabled = true;
+        ContainerLeanSelectable.OnSelect.RemoveAllListeners();
+        ContainerLeanSelectable.OnSelect.AddListener(HandleFingerDown);
+    }
+
+    public void OnGameLost()
+    {
+        ContainerLeanSelectable.enabled = false;
+    }
     
     private void UpdateFoodImage()
     {
@@ -107,13 +120,6 @@ public class ContainerBehaviour : MonoBehaviour
         {
             FoodImage.sprite = null;
         });
-    }
-
-    public void Initialize()
-    {
-        ContainerCustomLeanSpawn.Reset();
-        ContainerLeanSelectable.OnSelect.RemoveAllListeners();
-        ContainerLeanSelectable.OnSelect.AddListener(HandleFingerDown);
     }
 
     private void HandleFingerDown(LeanFinger finger)

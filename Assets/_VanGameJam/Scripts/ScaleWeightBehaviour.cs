@@ -34,7 +34,7 @@ public class ScaleWeightBehaviour : MonoBehaviour
         SetWeightText();
     }
 
-    public void SetWeight(float weight)
+    private void SetWeight(float weight)
     {
         _weight = weight;
         SetWeightText();

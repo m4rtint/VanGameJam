@@ -48,6 +48,7 @@ public class BaseWorldManager : MonoBehaviour
     private void OnFoodDeath()
     {
         _uiManager.LoseGame();
+        _foodGenerator.LoseGame();
     }
 
     private void StartGame()

@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Lean.Touch;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class CustomLeanSpawn : LeanSpawn
 {
@@ -28,7 +31,7 @@ public class CustomLeanSpawn : LeanSpawn
     {
         foreach (var child in _spawnedFood)
         {
-            Destroy(child);
+            child.GetComponent<FoodBehaviour>().OnRemove();
         }
     }
 }

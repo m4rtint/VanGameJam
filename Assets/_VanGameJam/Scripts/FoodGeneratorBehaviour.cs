@@ -101,6 +101,14 @@ public class FoodGeneratorBehaviour : MonoBehaviour
     {
         _generator = null;
     }
+
+    public void LoseGame()
+    {
+        foreach (var container in _listOfContainers)
+        {
+            container.OnGameLost();
+        }
+    }
 }
 
 public class FoodGenerator
