@@ -57,6 +57,11 @@ public class FoodBehaviour : MonoBehaviour
         }
     }
 
+    public bool HasMoved()
+    {
+        return FoodRigidBody.bodyType == RigidbodyType2D.Dynamic;
+    }
+    
     public void OnRemove()
     {
         FoodRigidBody.bodyType = RigidbodyType2D.Kinematic;

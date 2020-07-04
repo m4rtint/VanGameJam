@@ -80,7 +80,7 @@ public class ContainerBehaviour : MonoBehaviour
 
     public bool IsFoodEmpty()
     {
-        return _foodImage.sprite == null;
+        return _foodImage.sprite == null && _foodSpawned.HasMoved();
     }
 
     public void Initialize()
@@ -162,8 +162,6 @@ public class ContainerBehaviour : MonoBehaviour
         {
             _foodSpawned.OnFoodStoppedMoving -= ContainerOnFoodStoppedMoving;
         }
-            
-        _foodSpawned = null;//
     }
 
     private void ContainerOnFoodStoppedMoving()

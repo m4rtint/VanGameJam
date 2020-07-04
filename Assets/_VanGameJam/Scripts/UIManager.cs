@@ -1,6 +1,4 @@
 ﻿using System;
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -11,8 +9,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Components To Animate")] public MenuTitleBehaviour _title = null;
     public event Action OnPlayGame;
-    
-    public ScaleWeightBehaviour ScaleWeightBehaviourManager
+
+    private ScaleWeightBehaviour ScaleWeightBehaviourManager
     {
         get
         {
@@ -28,14 +26,13 @@ public class UIManager : MonoBehaviour
     public void Initialize()
     {
         ScaleWeightBehaviourManager.Initialize();
-        _losePanel.Reset();
+        _losePanel.Initialize();
         AddPlayButtonListener();
     }
     
     public void Reset()
     {
         ScaleWeightBehaviourManager.Reset();
-        _losePanel.Reset();
         _menuPanel.Reset();
     }
 
@@ -46,7 +43,7 @@ public class UIManager : MonoBehaviour
 
     public void LoseGame()
     {    
-        _losePanel.gameObject.SetActive(true);
+        _losePanel.ShowPanel();
     }
 
     private void AddPlayButtonListener()
@@ -72,6 +69,7 @@ public class UIManager : MonoBehaviour
 
     private void OnClickReplayButton()
     {
+        _losePanel.HidePanel();
         if (OnPlayGame != null)
         {
             OnPlayGame();

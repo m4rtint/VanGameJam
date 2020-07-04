@@ -31,7 +31,10 @@ public class CustomLeanSpawn : LeanSpawn
     {
         foreach (var child in _spawnedFood)
         {
-            child.GetComponent<FoodBehaviour>().OnRemove();
+            if (child != null)
+            {
+                child.GetComponent<FoodBehaviour>().OnRemove();
+            }
         }
     }
 }
