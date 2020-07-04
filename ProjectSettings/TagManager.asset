@@ -47,3 +47,9 @@ TagManager:
   - name: Floor
     uniqueID: 2101503181
     locked: 0
+  - name: UserInterface
+    uniqueID: 2436213881
+    locked: 0
+  - name: Food
+    uniqueID: 231999995
+    locked: 0
