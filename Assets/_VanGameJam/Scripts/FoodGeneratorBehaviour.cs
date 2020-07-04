@@ -10,14 +10,11 @@ public class FoodGeneratorBehaviour : MonoBehaviour
     [SerializeField] private List<ContainerBehaviour> _listOfContainers = null;
     private FoodGenerator _generator = null;
 
-    private int NumberOfContainersToFill = 0;
-
     public event Action<float> OnFoodWeightCounted;
     
     public void Initialize()
     {
         _generator = new FoodGenerator(_containerOfAllFood);
-        NumberOfContainersToFill = 0;
         FillContainers();
         InitializeContainers();
         AddDelegate();
@@ -34,7 +31,7 @@ public class FoodGeneratorBehaviour : MonoBehaviour
     {
         foreach (var container in _listOfContainers)
         {
-            container.OnFoodStoppedMoving += EmptyOneContainer;
+            container.OnFoodStoppedMoving += FillContainersIfNeeded;
             container.OnFoodStoppedMoving += AddWeightToScale;
         }
     }
@@ -43,7 +40,7 @@ public class FoodGeneratorBehaviour : MonoBehaviour
     {
         foreach (var container in _listOfContainers)
         {
-            container.OnFoodStoppedMoving -= EmptyOneContainer;
+            container.OnFoodStoppedMoving -= FillContainersIfNeeded;
             container.OnFoodStoppedMoving -= AddWeightToScale;
         }
     }
@@ -64,12 +61,19 @@ public class FoodGeneratorBehaviour : MonoBehaviour
         }
     }
 
-    private void EmptyOneContainer(float weight)
+    private void FillContainersIfNeeded(float weight)
     {
-        NumberOfContainersToFill++;
-        if (NumberOfContainersToFill == _listOfContainers.Count)
+        var amountEmpty = 0;
+        foreach (var container in _listOfContainers)
         {
-            NumberOfContainersToFill = 0;
+            if (container.IsFoodEmpty())
+            {
+                amountEmpty++;
+            }
+        }
+        
+        if (amountEmpty == _listOfContainers.Count)
+        {
             FillContainers();
         }
     }

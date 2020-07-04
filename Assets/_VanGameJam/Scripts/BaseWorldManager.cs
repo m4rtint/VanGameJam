@@ -9,7 +9,6 @@ public class BaseWorldManager : MonoBehaviour
     private void OnEnable()
     {
         _uiManager.Initialize();
-        _foodGenerator.Initialize();
         AddDelegate();
     }
 
@@ -32,7 +31,7 @@ public class BaseWorldManager : MonoBehaviour
     {
         _foodGenerator.OnFoodWeightCounted += CountWeight;
         _deathBox.OnEnterDeathBox += OnFoodDeath;
-        _uiManager.OnPlayGame += OnEnable;
+        _uiManager.OnPlayGame += StartGame;
     }
 
     private void RemoveDelegate()
@@ -49,5 +48,11 @@ public class BaseWorldManager : MonoBehaviour
     private void OnFoodDeath()
     {
         _uiManager.LoseGame();
+    }
+
+    private void StartGame()
+    {
+        _uiManager.Initialize();
+        _foodGenerator.Initialize();
     }
 }

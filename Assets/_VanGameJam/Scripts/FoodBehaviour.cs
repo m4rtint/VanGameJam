@@ -13,7 +13,6 @@ public class FoodBehaviour : MonoBehaviour
     private bool _needToCheckMovement = true;
     private int _numberOfTimesCheckedZeroMovement = 0;
     
-    public event Action OnReleasedFood;
     public event Action OnFoodStoppedMoving;
 
     private LeanDragTranslate FoodLeanDragTranslate
@@ -72,10 +71,6 @@ public class FoodBehaviour : MonoBehaviour
     private void Released(LeanFinger finger)
     {
         SetFoodState(false);
-        if (OnReleasedFood != null)
-        {
-            OnReleasedFood();
-        }
     }
 
     private void SetFoodState(bool isHeld)
@@ -103,6 +98,7 @@ public class FoodBehaviour : MonoBehaviour
             }
             
             _needToCheckMovement = false;
+            Debug.Log("Stopped moving");
             if (OnFoodStoppedMoving != null)
             {
                 OnFoodStoppedMoving();

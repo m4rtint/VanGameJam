@@ -74,6 +74,11 @@ public class ContainerBehaviour : MonoBehaviour
         RemoveImageFromContainer();
     }
 
+    public bool IsFoodEmpty()
+    {
+        return _foodImage.sprite == null;
+    }
+    
     private void UpdateFoodImage()
     {
         if (_currentFood.HasValue)
@@ -118,6 +123,7 @@ public class ContainerBehaviour : MonoBehaviour
     {
         if (food != null)
         {
+            RemoveFoodSpawnDelegate();
             _foodSpawned = food.GetComponent<FoodBehaviour>();
             if (_foodSpawned != null)
             {
@@ -140,8 +146,8 @@ public class ContainerBehaviour : MonoBehaviour
     {
         if (_currentFood.HasValue && OnFoodStoppedMoving != null)
         {
-            OnFoodStoppedMoving(_currentFood.Value.Weight);
             RemoveFoodSpawnDelegate();
+            OnFoodStoppedMoving(_currentFood.Value.Weight);
         }
     }
 
