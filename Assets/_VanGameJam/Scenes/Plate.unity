@@ -776,6 +776,8 @@ GameObject:
   - component: {fileID: 681822415}
   - component: {fileID: 681822417}
   - component: {fileID: 681822416}
+  - component: {fileID: 681822418}
+  - component: {fileID: 681822419}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -921,6 +923,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681822414}
   m_CullTransparentMesh: 0
+--- !u!225 &681822418
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681822414}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &681822419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681822414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238e3cbbc3d34934ca03881621b0a134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlphaEndValue: 0.3
+  AnimationDurationRate: 2
 --- !u!224 &747506421 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1015850667294272110, guid: f2134ab3de7c76a4a96c2e7937ad0173,
@@ -1203,6 +1231,7 @@ MonoBehaviour:
   _scaleWeightBehaviourManager: {fileID: 1937096931}
   _losePanel: {fileID: 1455874393}
   _menuPanel: {fileID: 1934338913}
+  _title: {fileID: 681822419}
 --- !u!1 &1182247278
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,15 @@
 ﻿using System;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private ScaleWeightBehaviour _scaleWeightBehaviourManager = null;
     [SerializeField] private LosePanelBehaviour _losePanel = null;
     [SerializeField] private MenuScreenBehaviour _menuPanel = null;
+
+    [Header("Components To Animate")] public MenuTitleBehaviour _title = null;
     public event Action OnPlayGame;
     
     public ScaleWeightBehaviour ScaleWeightBehaviourManager
@@ -57,6 +60,7 @@ public class UIManager : MonoBehaviour
     private void OnClickPlayButton()
     {
         _menuPanel.HidePanel();
+        _title.AlphaOut();
         OnClickReplayButton();
     }
 
