@@ -180,7 +180,7 @@ MonoBehaviour:
   onDeselect:
     m_PersistentCalls:
       m_Calls: []
-  isSelected: 0
+  isSelected: 1
 --- !u!114 &203118215
 MonoBehaviour:
   m_ObjectHideFlags: 0

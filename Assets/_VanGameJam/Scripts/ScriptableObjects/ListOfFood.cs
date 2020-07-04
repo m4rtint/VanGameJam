@@ -15,4 +15,5 @@ public struct Food
 {
     public Sprite FoodImage;
     public GameObject FoodObject;
+    public float Weight;
 }

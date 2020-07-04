@@ -8,6 +8,8 @@ public class FoodBehaviour : MonoBehaviour
     private LeanSelectable _foodLeanSelectable = null;
     private LeanDragTranslate _foodLeanDragTranslate = null;
 
+    public event Action OnReleasedFood;
+
     private LeanDragTranslate FoodLeanDragTranslate
     {
         get
@@ -52,18 +54,21 @@ public class FoodBehaviour : MonoBehaviour
         FoodLeanSelectable.OnSelectUp.RemoveAllListeners();
         FoodLeanSelectable.OnSelectUp.AddListener(Released);
         SetFoodState(true);
-        FoodLeanDragTranslate.enabled = true;
     }
 
     private void OnDisable()
     {
         FoodLeanSelectable.OnSelectUp.RemoveAllListeners();
+        Destroy(gameObject);
     }
 
     private void Released(LeanFinger finger)
     {
         SetFoodState(false);
-        FoodLeanDragTranslate.enabled = false;
+        if (OnReleasedFood != null)
+        {
+            OnReleasedFood();
+        }
     }
 
     private void SetFoodState(bool isHeld)
@@ -76,5 +81,7 @@ public class FoodBehaviour : MonoBehaviour
         {
             FoodRigidBody.bodyType = RigidbodyType2D.Dynamic;
         }
+        
+        FoodLeanDragTranslate.enabled = isHeld;
     }
 }

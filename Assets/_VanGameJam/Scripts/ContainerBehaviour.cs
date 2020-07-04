@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using JetBrains.Annotations;
 using Lean.Touch;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -10,9 +11,26 @@ public class ContainerBehaviour : MonoBehaviour
     [SerializeField]
     private Image _foodImage = null;
     private Food? _currentFood = null;
+    [CanBeNull] private FoodBehaviour _foodSpawned = null;
     
     // Lean Dependencies
     private LeanSelectable _containerLeanSelectable = null;
+    private CustomLeanSpawn _containerCustomLeanSpawn = null;
+
+    public event Action OnReleasedFood;
+
+    private CustomLeanSpawn ContainerCustomLeanSpawn
+    {
+        get
+        {
+            if (_containerCustomLeanSpawn == null)
+            {
+                _containerCustomLeanSpawn = GetComponent<CustomLeanSpawn>();
+            }
+
+            return _containerCustomLeanSpawn;
+        }
+    }
 
     private LeanSelectable ContainerLeanSelectable
     {
@@ -44,7 +62,7 @@ public class ContainerBehaviour : MonoBehaviour
     /// Puts the Food for this container
     /// </summary>
     /// <param name="food"></param>
-    public void SetFood(Food food)
+    public void SetFood(Food? food)
     {
         _currentFood = food;
         UpdateFoodImage();
@@ -55,6 +73,10 @@ public class ContainerBehaviour : MonoBehaviour
         if (_currentFood.HasValue)
         {
             _foodImage.sprite = _currentFood.Value.FoodImage;
+        }
+        else
+        {
+            _foodImage.sprite = null;
         }
     }
 
@@ -74,8 +96,52 @@ public class ContainerBehaviour : MonoBehaviour
     {
         if (_currentFood.HasValue)
         {
-            GetComponent<LeanSpawn>().Prefab = _currentFood.Value.FoodObject.transform;
-            GetComponent<LeanSpawn>().Spawn();
+            SpawnFood();
+            RemoveFromContainer();
         }
     }
+
+    private void RemoveFromContainer()
+    {
+        SetFood(null);
+    }
+
+    private void SpawnFood()
+    {
+        ContainerCustomLeanSpawn.Prefab = _currentFood.Value.FoodObject.transform;
+        var foodSpawned = ContainerCustomLeanSpawn.SpawnFromPosition();
+        AddDelegate(foodSpawned);
+    }
+
+    private void AddDelegate(GameObject food)
+    {
+        if (food != null)
+        {
+            _foodSpawned = food.GetComponent<FoodBehaviour>();
+            if (_foodSpawned != null)
+            {
+                _foodSpawned.OnReleasedFood += ContainerOnReleasedFood;
+            }
+        }
+    }
+    
+    private void RemoveFoodSpawnDelegate()
+    {
+        if (_foodSpawned != null)
+        {
+            _foodSpawned.OnReleasedFood -= ContainerOnReleasedFood;
+        }
+            
+        _foodSpawned = null;
+    }
+
+    private void ContainerOnReleasedFood()
+    {
+        if (OnReleasedFood != null)
+        {
+            RemoveFoodSpawnDelegate();
+            OnReleasedFood();
+        }
+    }
+
 }

@@ -9,11 +9,32 @@ public class FoodGeneratorBehaviour : MonoBehaviour
     [SerializeField] private ListOfFood _containerOfAllFood = null;
     [SerializeField] private List<ContainerBehaviour> _listOfContainers = null;
     private FoodGenerator _generator = null;
+
+    private int NumberOfContainersToFill = 0;
     
     private void OnEnable()
     {
         _generator = new FoodGenerator(_containerOfAllFood);
         FillContainers();
+        AddDelegate();
+    }
+
+    private void AddDelegate()
+    {
+        foreach (var container in _listOfContainers)
+        {
+            container.OnReleasedFood += EmptyOneContainer;
+        }
+    }
+
+    private void EmptyOneContainer()
+    {
+        NumberOfContainersToFill++;
+        if (NumberOfContainersToFill == _listOfContainers.Count)
+        {
+            NumberOfContainersToFill = 0;
+            FillContainers();
+        }
     }
 
     private void FillContainers()
