@@ -8,7 +8,10 @@ public class FoodBehaviour : MonoBehaviour
     private LeanSelectable _foodLeanSelectable = null;
     private LeanDragTranslate _foodLeanDragTranslate = null;
 
+    private bool _needToCheckMovement = true;
+    
     public event Action OnReleasedFood;
+    public event Action OnFoodStoppedMoving;
 
     private LeanDragTranslate FoodLeanDragTranslate
     {
@@ -83,5 +86,24 @@ public class FoodBehaviour : MonoBehaviour
         }
         
         FoodLeanDragTranslate.enabled = isHeld;
+    }
+
+    private void FixedUpdate()
+    {
+        if (HasFoodStoppedMoving() && _needToCheckMovement)
+        {
+            _needToCheckMovement = false;
+            if (OnFoodStoppedMoving != null)
+            {
+                OnFoodStoppedMoving();
+            }
+        }
+    }
+
+    private bool HasFoodStoppedMoving()
+    {
+        return FoodRigidBody.bodyType == RigidbodyType2D.Dynamic && 
+               FoodRigidBody.velocity == Vector2.zero &&
+               Math.Abs(FoodRigidBody.angularVelocity) < 0.05;
     }
 }
