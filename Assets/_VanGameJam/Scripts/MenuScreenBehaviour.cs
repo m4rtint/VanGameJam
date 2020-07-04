@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class MenuScreenBehaviour : BaseSimplePanel
 {
     public void HidePanel()
     {
-        ReplayButton.transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack);
     }
 }

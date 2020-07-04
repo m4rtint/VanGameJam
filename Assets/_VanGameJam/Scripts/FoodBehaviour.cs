@@ -1,10 +1,12 @@
 ﻿using System;
+using DG.Tweening;
 using Lean.Touch;
 using UnityEngine;
 
 public class FoodBehaviour : MonoBehaviour
 {
     private const int NumberOfTimesToCheckZeroMovement = 3;
+    private const float AnimationTime = 0.5f;
     
     private Rigidbody2D _foodRigidBody = null;
     private LeanSelectable _foodLeanSelectable = null;
@@ -60,6 +62,13 @@ public class FoodBehaviour : MonoBehaviour
         FoodLeanSelectable.OnSelectUp.AddListener(Released);
         SetFoodState(true);
         _numberOfTimesCheckedZeroMovement = 0;
+        AnimateStart();
+    }
+
+    private void AnimateStart()
+    {
+        transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.one, AnimationTime).SetEase(Ease.OutQuart).SetDelay(AnimationTime);
     }
 
     private void OnDisable()

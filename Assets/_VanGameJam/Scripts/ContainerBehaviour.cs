@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Lean.Touch;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class ContainerBehaviour : MonoBehaviour
 {
+    private const float AnimationTime = 0.5f;
+    
     [SerializeField]
     private Image _foodImage = null;
     private Food? _currentFood = null;
@@ -70,6 +73,7 @@ public class ContainerBehaviour : MonoBehaviour
     {
         _currentFood = null;
         _foodSpawned = null;
+        FoodImage.transform.localScale = Vector3.zero;
         RemoveFoodSpawnDelegate();
         RemoveImageFromContainer();
     }
@@ -84,11 +88,25 @@ public class ContainerBehaviour : MonoBehaviour
         if (_currentFood.HasValue)
         {
             FoodImage.sprite = _currentFood.Value.FoodImage;
+            AnimateFillFood();
         }
         else
         {
-            FoodImage.sprite = null;
+            RemoveImageFromContainer();
         }
+    }
+
+    private void AnimateFillFood()
+    {
+        FoodImage.transform.DOScale(Vector3.one, AnimationTime).SetEase(Ease.OutBack);
+    }
+
+    private void AnimateEmptyFood()
+    {
+        FoodImage.transform.DOScale(Vector3.zero, AnimationTime).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            FoodImage.sprite = null;
+        });
     }
 
     public void Initialize()
@@ -109,7 +127,7 @@ public class ContainerBehaviour : MonoBehaviour
 
     private void RemoveImageFromContainer()
     {
-        FoodImage.sprite = null;
+        AnimateEmptyFood();
     }
 
     private void SpawnFood()

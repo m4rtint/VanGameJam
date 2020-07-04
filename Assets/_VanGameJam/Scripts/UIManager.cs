@@ -59,9 +59,14 @@ public class UIManager : MonoBehaviour
 
     private void OnClickPlayButton()
     {
+        AnimateOnPlay();
+        OnClickReplayButton();
+    }
+
+    private void AnimateOnPlay()
+    {
         _menuPanel.HidePanel();
         _title.AlphaOut();
-        OnClickReplayButton();
     }
 
     private void OnClickReplayButton()
