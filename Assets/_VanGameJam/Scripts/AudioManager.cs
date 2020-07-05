@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,14 +7,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private ListOfAudioClips _clips = null;
 
     public static AudioManager Instance => _instance;
-
-    private void OnEnable()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-    }
+    public bool IsGameInSession { get; set; }
 
     private AudioSource _audioManagerAudioSource = null;
     private AudioSource AudioManagerAudioSource
@@ -43,7 +35,10 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFillContainerWithFood()
     {
-        PlayClip(_clips.FoodAppear);
+        if (IsGameInSession)
+        {
+            PlayClip(_clips.FoodAppear);
+        }
     }
 
     public void PlayGrabbedFood()
@@ -53,7 +48,10 @@ public class AudioManager : MonoBehaviour
 
     public void PlayReleaseFood()
     {
-        PlayClip(_clips.FoodOnRelease);
+        if (IsGameInSession)
+        {
+            PlayClip(_clips.FoodOnRelease);
+        }
     }
 
     public void PlayContainerClicked()
@@ -65,5 +63,13 @@ public class AudioManager : MonoBehaviour
     {
         AudioManagerAudioSource.clip = clip;
         AudioManagerAudioSource.Play();
+    }
+    
+    private void OnEnable()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
     }
 }

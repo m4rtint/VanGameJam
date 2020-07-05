@@ -54,6 +54,7 @@ public class BaseWorldManager : MonoBehaviour
             AudioManager.Instance.PlayGameLose();
             _uiManager.LoseGame();
             _foodGenerator.LoseGame();
+            AudioManager.Instance.IsGameInSession = _isGameInSession;
         }
     }
 
@@ -62,5 +63,6 @@ public class BaseWorldManager : MonoBehaviour
         _uiManager.Initialize();
         _foodGenerator.Initialize();
         _isGameInSession = true;
+        AudioManager.Instance.IsGameInSession = _isGameInSession;
     }
 }

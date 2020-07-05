@@ -87,14 +87,14 @@ public class ContainerBehaviour : MonoBehaviour
     public void Initialize()
     {
         ContainerCustomLeanSpawn.Reset();
-        ContainerLeanSelectable.enabled = true;
+        TurnTouch(true);
         ContainerLeanSelectable.OnSelect.RemoveAllListeners();
         ContainerLeanSelectable.OnSelect.AddListener(HandleFingerDown);
     }
 
     public void OnGameLost()
     {
-        ContainerLeanSelectable.enabled = false;
+        TurnTouch(false);
     }
 
     private void PlaySetFoodSFX()
@@ -117,6 +117,7 @@ public class ContainerBehaviour : MonoBehaviour
 
     private void AnimateFillFood()
     {
+        TurnTouch(true);
         FoodImage.transform.DOScale(Vector3.one, AnimationTime).SetEase(Ease.OutBack);
     }
 
@@ -135,7 +136,13 @@ public class ContainerBehaviour : MonoBehaviour
             PlayTouchContainerSFX();
             SpawnFood();
             RemoveImageFromContainer();
+            TurnTouch(false);
         }
+    }
+
+    private void TurnTouch(bool on)
+    {
+        ContainerLeanSelectable.enabled = on;
     }
 
     private void PlayTouchContainerSFX()

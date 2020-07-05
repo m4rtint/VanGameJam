@@ -104,6 +104,7 @@ public class FoodGeneratorBehaviour : MonoBehaviour
 
     public void LoseGame()
     {
+        _generator = null;
         foreach (var container in _listOfContainers)
         {
             container.OnGameLost();
