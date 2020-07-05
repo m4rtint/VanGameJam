@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1770bcb2b40d14f91f4e74eaa3b826, type: 3}
+  m_Name: ListOfAudioClips
+  m_EditorClassIdentifier: 
+  ButtonClick: {fileID: 8300000, guid: 49217564762b019479f1eef5aac9e45a, type: 3}
+  FoodClick: {fileID: 8300000, guid: 9cf134b7d367fb541871574b49fc687e, type: 3}
+  FoodAppear: {fileID: 8300000, guid: bfb94688d4732244da414a8b11606e06, type: 3}
+  FoodOnGrab: {fileID: 8300000, guid: e3bc349bb5d8c4e4c8525bb8f5ed3e7a, type: 3}
+  FoodOnRelease: {fileID: 8300000, guid: ff9d972a9a2013d4f8acd527d7541e47, type: 3}
+  OnLose: {fileID: 8300000, guid: 04bafcffa71fa114eb5cda7f7b9399ed, type: 3}

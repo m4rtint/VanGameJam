@@ -5,6 +5,7 @@ public class BaseWorldManager : MonoBehaviour
     [SerializeField] private FoodGeneratorBehaviour _foodGenerator = null;
     [SerializeField] private UIManager _uiManager = null;
     [SerializeField] private DeathBoxBehaviour _deathBox = null;
+    private bool _isGameInSession = false;
     
     private void OnEnable()
     {
@@ -47,13 +48,19 @@ public class BaseWorldManager : MonoBehaviour
 
     private void OnFoodDeath()
     {
-        _uiManager.LoseGame();
-        _foodGenerator.LoseGame();
+        if (_isGameInSession)
+        {
+            _isGameInSession = false;
+            AudioManager.Instance.PlayGameLose();
+            _uiManager.LoseGame();
+            _foodGenerator.LoseGame();
+        }
     }
 
     private void StartGame()
     {
         _uiManager.Initialize();
         _foodGenerator.Initialize();
+        _isGameInSession = true;
     }
 }

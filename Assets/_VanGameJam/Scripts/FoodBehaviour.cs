@@ -75,6 +75,7 @@ public class FoodBehaviour : MonoBehaviour
     {   
         FoodLeanSelectable.OnSelectUp.RemoveAllListeners();
         FoodLeanSelectable.OnSelectUp.AddListener(Released);
+        FoodLeanSelectable.OnSelect.AddListener(Selected);
         SetFoodState(true);
         _numberOfTimesCheckedZeroMovement = 0;
         AnimateStart();
@@ -94,7 +95,13 @@ public class FoodBehaviour : MonoBehaviour
 
     private void Released(LeanFinger finger)
     {
+        AudioManager.Instance.PlayReleaseFood();
         SetFoodState(false);
+    }
+
+    private void Selected(LeanFinger finger)
+    {
+        AudioManager.Instance.PlayGrabbedFood();
     }
 
     private void SetFoodState(bool isHeld)

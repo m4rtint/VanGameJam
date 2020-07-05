@@ -67,6 +67,7 @@ public class ContainerBehaviour : MonoBehaviour
     {
         _currentFood = food;
         UpdateFoodImage();
+        PlaySetFoodSFX();
     }
 
     public void Reset()
@@ -94,6 +95,11 @@ public class ContainerBehaviour : MonoBehaviour
     public void OnGameLost()
     {
         ContainerLeanSelectable.enabled = false;
+    }
+
+    private void PlaySetFoodSFX()
+    {
+        AudioManager.Instance.PlayFillContainerWithFood();
     }
     
     private void UpdateFoodImage()
@@ -126,9 +132,15 @@ public class ContainerBehaviour : MonoBehaviour
     {
         if (FoodImage.sprite != null)
         {
+            PlayTouchContainerSFX();
             SpawnFood();
             RemoveImageFromContainer();
         }
+    }
+
+    private void PlayTouchContainerSFX()
+    {
+        AudioManager.Instance.PlayContainerClicked();
     }
 
     private void RemoveImageFromContainer()
