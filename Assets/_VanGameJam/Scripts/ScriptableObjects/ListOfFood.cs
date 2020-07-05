@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "List Of Food", menuName = "MPHT/ListOfFood", order = 1)]
 public class ListOfFood : ScriptableObject
@@ -13,7 +14,7 @@ public class ListOfFood : ScriptableObject
 [Serializable]
 public struct Food
 {
-    public Sprite FoodImage;
+    public Sprite FoodImage => FoodObject.GetComponent<SpriteRenderer>().sprite;
     public GameObject FoodObject;
     public float Weight;
 }

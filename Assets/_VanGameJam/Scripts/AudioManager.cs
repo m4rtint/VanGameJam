@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     private static AudioManager _instance = null;
 
-    [SerializeField] private ListOfAudioClips _clips;
+    [SerializeField] private ListOfAudioClips _clips = null;
 
     public static AudioManager Instance => _instance;
 

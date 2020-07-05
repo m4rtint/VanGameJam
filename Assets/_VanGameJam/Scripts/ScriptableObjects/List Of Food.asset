@@ -13,11 +13,39 @@ MonoBehaviour:
   m_Name: List Of Food
   m_EditorClassIdentifier: 
   _foodContainer:
-  - FoodImage: {fileID: 21300000, guid: 47d90577eb055fd4bba1ec7562a5b7f7, type: 3}
-    FoodObject: {fileID: 4970084301181253204, guid: 4e15147d96b59644cb68290cb328a5aa,
+  - FoodObject: {fileID: 4970084301181253204, guid: 4e15147d96b59644cb68290cb328a5aa,
       type: 3}
     Weight: 89
-  - FoodImage: {fileID: 21300000, guid: cf7f23e7ab1005d4dab8f4b870b44814, type: 3}
-    FoodObject: {fileID: 7883722671055091808, guid: aaf42944025262447a5c2075b4655586,
+  - FoodObject: {fileID: 7883722671055091808, guid: aaf42944025262447a5c2075b4655586,
       type: 3}
     Weight: 1000
+  - FoodObject: {fileID: 3472745284928229202, guid: 6ef58cc6ff4fef947863bce0af3985d8,
+      type: 3}
+    Weight: 100
+  - FoodObject: {fileID: 1361432627652343897, guid: 3ec8a6654527dec49a3ddc0e645605e1,
+      type: 3}
+    Weight: 75
+  - FoodObject: {fileID: 5269351091867017296, guid: 65b32b95e552d824a98eb67dd17eed3b,
+      type: 3}
+    Weight: 173
+  - FoodObject: {fileID: 7004050863690164456, guid: 6271e16f80fc9124eb2a8b1fad4ba71c,
+      type: 3}
+    Weight: 346
+  - FoodObject: {fileID: 8344277344059334279, guid: 7f4a7daa561f5664482c2cfbab967069,
+      type: 3}
+    Weight: 61
+  - FoodObject: {fileID: 3219022686485619636, guid: dcf9c785c4e0f9b46bb294868a2f03b7,
+      type: 3}
+    Weight: 210
+  - FoodObject: {fileID: 8307631275853806371, guid: dd9967857f08f3e44833ea25936f6427,
+      type: 3}
+    Weight: 80
+  - FoodObject: {fileID: 7416033542303660339, guid: 06b491205332f784499c183ca67cbaf1,
+      type: 3}
+    Weight: 250
+  - FoodObject: {fileID: 1080054403442558614, guid: 6d59f2bda19f7404b8ebea24323d2116,
+      type: 3}
+    Weight: 35
+  - FoodObject: {fileID: 1770779136487468024, guid: f1d79cc4ecd2577419a5d5b2b083c5a4,
+      type: 3}
+    Weight: 35
